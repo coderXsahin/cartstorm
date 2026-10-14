@@ -19,7 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByNameContainingIgnoreCaseAndCategoryIgnoreCase(
             String name, String category, Pageable pageable);
 
-    @Modifying
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query("""
         UPDATE Product p
         SET p.stock = p.stock - :quantity
